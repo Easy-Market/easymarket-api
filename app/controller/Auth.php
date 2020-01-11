@@ -12,7 +12,7 @@
 		public function login($data)
 		{
 			$query = 
-			$this->select('SELECT userID FROM users WHERE email ="'. $data["email"] .'" AND password ="'. $data["password"] .'"', false);
+			$this->select('SELECT us_id FROM users WHERE us_email ="'.$data["email"].'" AND us_password ="'.$data["password"].'"', false);
 			$this->setSession('userID', $query['userID']);
 			return (!$query['userID']) ? $query : 200 ;
 		}
@@ -20,13 +20,7 @@
 		{
 			if ($this->insert('users', $data) == 200) {
 				$this->setSession('userID', $this->lastID());
-				return 
-				$this->setVerification(array(
-					'userID' => $this->getSession('userID'),
-					'verificationCode' => 'xyz',
-					'dateSent' => GLOBAL_DATE,
-					'is_used' => 0
-				));
+				return 200;
 			} else {
 				return $this->insert('users', $data);
 			}
