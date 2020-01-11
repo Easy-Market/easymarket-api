@@ -76,9 +76,13 @@
 		}
 		public function fetchAll($query = '')
 		{
-			while ($row = mysqli_fetch_all($query, MYSQLI_ASSOC)) {
-				return $row;
-			}
+			//while ($row = mysqli_fetch_all($query, MYSQLI_ASSOC)) {
+			//	return $row;
+			//}
+			while($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
+		       $rows[] = $row;
+		    }
+			   return @$rows;
 		}
 		public function error()
 		{
