@@ -18,13 +18,20 @@
 		}
 		public function join($data)
 		{
-			$checkEmail = $this->select('SELECT * FROM users WHERE us_email = "'.$data["email"].'"');
-			if()
-			if ($this->insert('users', $data) == 200) {
-				$this->setSession('userID', $this->lastID());
-				return 200;
+			$check_email = $this->select('SELECT * FROM users WHERE us_email="'. $data["us_email"] .'"', true);
+			if ($check_email == "null") {
+				if ($this->insert('users', $data) == 200) {
+					$this->setSession('userID', $this->lastID());
+					return 200;
+				} else {
+					return $this->insert('users', $data);
+				}
 			} else {
-				return $this->insert('users', $data);
+				$this->viewJson();
+				return json_encode(array(
+					'code' => 409,
+					'message' => 'email exists' 
+				));
 			}
 		}
 		public function setVerification($data)
