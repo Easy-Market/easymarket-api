@@ -1,9 +1,18 @@
 <?php
   # Database Configuration
-    defined('DATABASE_HOST')    OR Define('DATABASE_HOST', 'localhost');
-    defined('DATABASE_USER')    OR define('DATABASE_USER', 'root');
-    defined('DATABASE_CODE')    OR define('DATABASE_CODE', 'root');
-    defined('DATABASE_NAME')    OR define('DATABASE_NAME', 'mymarket');
+    $localhost = array('127.0.0.1', ':1');
+    if(in_array($_SERVER['REMOTE_ADDR'], $localhost)){
+      defined('DATABASE_HOST')    OR Define('DATABASE_HOST', 'localhost');
+      defined('DATABASE_USER')    OR define('DATABASE_USER', 'root');
+      defined('DATABASE_CODE')    OR define('DATABASE_CODE', 'root');
+      defined('DATABASE_NAME')    OR define('DATABASE_NAME', 'mymarket');
+    } else {
+      #change values to correspond with live sever environment
+      defined('DATABASE_HOST')    OR Define('DATABASE_HOST', 'localhost');
+      defined('DATABASE_USER')    OR define('DATABASE_USER', 'root');
+      defined('DATABASE_CODE')    OR define('DATABASE_CODE', 'root');
+      defined('DATABASE_NAME')    OR define('DATABASE_NAME', 'mymarket');
+    }
   # Permissions
     defined('ENV')              OR define('ENV', 1); 
   # Server Configuration

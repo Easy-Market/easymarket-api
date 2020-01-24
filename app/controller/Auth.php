@@ -13,11 +13,13 @@
 		{
 			$query = 
 			$this->select('SELECT us_id FROM users WHERE us_email ="'.$data["email"].'" AND us_password ="'.$data["password"].'"', false);
-			$this->setSession('userID', $query['userID']);
-			return (!$query['userID']) ? $query : 200 ;
+			//$this->setSession('userID', $query['userID']);
+			//return (!$query['userID']) ? $query : 200 ;
 		}
 		public function join($data)
 		{
+			$checkEmail = $this->select('SELECT * FROM users WHERE us_email = "'.$data["email"].'"');
+			if()
 			if ($this->insert('users', $data) == 200) {
 				$this->setSession('userID', $this->lastID());
 				return 200;
